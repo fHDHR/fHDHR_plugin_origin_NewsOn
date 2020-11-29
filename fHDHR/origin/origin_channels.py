@@ -21,6 +21,7 @@ class OriginChannels():
                                      "name": channel_dict["config"]["affiliation"] or channel_dict["config"]["callsign"],
                                      "callsign": channel_dict["config"]["callsign"],
                                      "id": channel_dict["identifier"],
+                                     "thumbnail": channel_dict["icon"],
                                      }
                 channel_list.append(clean_station_item)
 
