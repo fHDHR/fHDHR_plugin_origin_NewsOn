@@ -27,14 +27,17 @@ class OriginChannels():
 
         return channel_list
 
-    def get_channel_stream(self, chandict):
+    def get_channel_stream(self, chandict, stream_args):
         channels_json = self.fhdhr.web.session.get(self.base_api).json()
         origin_chandict = self.get_channel_dict(channels_json, "identifier", chandict["origin_id"])
         streamdict = self.get_channel_dict(origin_chandict["streams"], "StreamType", 'website')
         streamurl = streamdict['Url']
         if self.fhdhr.config.dict["origin"]["force_best"]:
             streamurl = self.m3u8_beststream(streamurl)
-        return streamurl
+
+        stream_info = {"url": streamurl}
+
+        return stream_info
 
     def get_channel_dict(self, chanlist, keyfind, valfind):
         return next(item for item in chanlist if item[keyfind] == valfind)
