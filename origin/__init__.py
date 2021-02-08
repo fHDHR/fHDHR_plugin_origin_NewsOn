@@ -5,6 +5,9 @@ class Plugin_OBJ():
     def __init__(self, plugin_utils):
         self.plugin_utils = plugin_utils
 
+        self.tuners = self.plugin_utils.config.dict["newson"]["tuners"]
+        self.stream_method = self.plugin_utils.config.dict["newson"]["stream_method"]
+
         self.base_api = 'http://watchnewson.com/api/linear/channels'
 
     def get_channels(self):
