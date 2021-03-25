@@ -1,3 +1,5 @@
+import json
+from simplejson import errors as simplejsonerrors
 
 
 class Plugin_OBJ():
@@ -19,7 +21,15 @@ class Plugin_OBJ():
 
         channel_list = []
 
-        channels_json = self.plugin_utils.web.session.get(self.base_api).json()
+        try:
+            channels_json = self.plugin_utils.web.session.get(self.base_api).json()
+        except json.JSONDecodeError as err:
+            self.plugin_utils.logger.error('Collecting Channels Failed: %s' % err)
+            return []
+        except simplejsonerrors.JSONDecodeError as err:
+            self.plugin_utils.logger.error('Collecting Channels Failed: %s' % err)
+            return []
+
         for channel_dict in channels_json:
             if not channel_dict["disabled"]:
 
