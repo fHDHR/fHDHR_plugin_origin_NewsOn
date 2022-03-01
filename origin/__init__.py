@@ -9,14 +9,6 @@ class Plugin_OBJ():
 
         self.base_api = 'http://watchnewson.com/api/linear/channels'
 
-    @property
-    def tuners(self):
-        return self.plugin_utils.config.dict["newson"]["tuners"]
-
-    @property
-    def stream_method(self):
-        return self.plugin_utils.config.dict["newson"]["stream_method"]
-
     def get_channels(self):
 
         channel_list = []
